@@ -5,7 +5,11 @@
         "croaky"
       ],
       "id": "on-call",
-      "published": "2018-11-10"
+      "published": "2018-11-12",
+      "tags": [
+        "infra",
+        "env"
+      ]
     },
     {
       "author_ids": [
