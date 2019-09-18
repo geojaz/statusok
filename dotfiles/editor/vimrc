@@ -31,6 +31,11 @@ set splitright
 set tabstop=2
 set textwidth=80
 
+
+" theme
+set background=dark
+colorscheme palenight
+
 if &compatible
   set nocompatible
 end
@@ -60,6 +65,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-projectionist'
+  Plug 'drewtempelmeyer/palenight.vim'
+  Plug 'mhartington/oceanic-next'
+
 call plug#end()
 
 " When reading a buffer, jump to last known cursor position except for

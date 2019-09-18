@@ -7,6 +7,11 @@ alias m="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias mkdir="mkdir -p"
 alias path='echo $PATH | tr -s ":" "\n"'
 
+alias st='git status'
+alias ls='ls -alh'
+alias gca='git commit --amend'
+alias gpfo='git push origin --force'
+
 # clone https://github.com/statusok/statusok
 # clones the repo to $HOME/src/github.com/statusok/statusok
 function clone() {
