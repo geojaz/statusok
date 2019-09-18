@@ -11,6 +11,8 @@ alias st='git status'
 alias ls='ls -alh'
 alias gca='git commit --amend'
 alias gpfo='git push origin --force'
+alias gl1='git log --pretty=oneline'
+alias latest_branches='git for-each-ref --sort=-committerdate refs/heads/'
 
 # clone https://github.com/statusok/statusok
 # clones the repo to $HOME/src/github.com/statusok/statusok
@@ -98,36 +100,17 @@ export GO111MODULE=on
 export GOPATH="$HOME/go"
 PATH="$GOPATH/bin:$PATH"
 PATH="/usr/local/go/bin:$PATH"
-
-# Set environment variables for monorepos
-export OK="$HOME/statusok"
-export POGO="$HOME/pogo"
-export ROOSTER="$HOME/rooster"
+export DEV="$HOME/dev"
 
 # Set environment variable for localhost TLS certificate authority file
 # https://github.com/FiloSottile/mkcert
 export CAFILE="$HOME/Library/Application Support/mkcert/rootCA.pem"
 
 # Change into most common directories
-export CDPATH="$CDPATH:$POGO:$OK:$ROOSTER"
-
-# Prepend monorepo scripts
-PATH="$OK/bin:$PATH"
-PATH="$POGO/bin:$PATH"
-PATH="$ROOSTER/bin:$PATH"
+export CDPATH="$CDPATH:$OK:"
 
 # Prepend Homebrew binaries
 PATH="/usr/local/bin:$PATH"
 
-# Prepend programming language binaries via ASDF shims
-PATH="$HOME/.asdf/bin:$PATH"
-PATH="$HOME/.asdf/shims:$PATH"
-
-# Prepend Android tools
-ANDROIDSDK="$HOME/Library/Android/sdk"
-PATH="$ANDROIDSDK/emulator:$ANDROIDSDK/platform-tools:$ANDROIDSDK/tools:$PATH"
-
-# mkdir .git/safe in trusted project to add binstubs
-PATH=".git/safe/../../bin:$PATH"
 
 export PATH
