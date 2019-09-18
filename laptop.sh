@@ -50,36 +50,28 @@ fi
 brew analytics off
 brew update
 brew bundle --file=- <<EOF
-tap "heroku/brew"
-tap "homebrew/services"
-
-brew "awscli"
-brew "exercism"
+# fzf fuzzy file search; used by vim
 brew "fzf"
+
+# the git on mac is crippled
 brew "git"
 brew "git-lfs"
-brew "heroku"
-brew "hub"
-brew "imagemagick@6"
+brew "hub" # github cli
+
 brew "jq"
 brew "libyaml"
 brew "openssl"
-brew "postgresql", restart_service: :changed
 brew "protobuf"
-brew "r"
-brew "reattach-to-user-namespace"
+
+# bash linter
 brew "shellcheck"
 brew "the_silver_searcher"
+brew "zsh"
 brew "tmux"
 brew "vim"
 brew "watch"
-brew "watchman"
-brew "zsh"
-
-cask "aws-vault"
 cask "kitty"
-cask "ngrok"
-cask "rstudio"
+
 EOF
 
 brew upgrade
@@ -87,9 +79,6 @@ brew cleanup
 
 (
   cd "$OK/dotfiles"
-
-  ln -sf "$PWD/asdf/asdfrc" "$HOME/.asdfrc"
-  ln -sf "$PWD/asdf/tool-versions" "$HOME/.tool-versions"
 
   ln -sf "$PWD/editor/vimrc" "$HOME/.vimrc"
 
@@ -106,14 +95,8 @@ brew cleanup
   ln -sf "$PWD/git/gitignore" "$HOME/.gitignore"
   ln -sf "$PWD/git/gitmessage" "$HOME/.gitmessage"
 
-  mkdir -p "$HOME/.bundle"
-  ln -sf "$PWD/ruby/bundle/config" "$HOME/.bundle/config"
-  ln -sf "$PWD/ruby/gemrc" "$HOME/.gemrc"
-  ln -sf "$PWD/ruby/rspec" "$HOME/.rspec"
-
   ln -sf "$PWD/shell/curlrc" "$HOME/.curlrc"
-  ln -sf "$PWD/shell/hushlogin" "$HOME/.hushlogin"
-
+  
   mkdir -p "$HOME/.config/kitty"
   ln -sf "$PWD/shell/kitty.conf" "$HOME/.config/kitty/kitty.conf"
 
@@ -122,8 +105,8 @@ brew cleanup
 
   ln -sf "$PWD/shell/tmux.conf" "$HOME/.tmux.conf"
   ln -sf "$PWD/shell/zshrc" "$HOME/.zshrc"
-
   ln -sf "$PWD/sql/psqlrc" "$HOME/.psqlrc"
+
 )
 
 if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
@@ -134,24 +117,6 @@ else
 fi
 vim -u "$HOME/.vimrc" +PlugUpdate +PlugClean! +qa
 
-if [ -d "$HOME/.asdf" ]; then
-  (
-    cd "$HOME/.asdf"
-    git fetch origin
-    git reset --hard origin/master
-  )
-else
-  git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
-fi
-
-asdf_plugin_update() {
-  if ! asdf plugin-list | grep -Fq "$1"; then
-    asdf plugin-add "$1" "$2"
-  fi
-
-  asdf plugin-update "$1"
-}
-
 # Go
 gover="1.13"
 if ! go version | grep -Fq "$gover"; then
@@ -159,15 +124,3 @@ if ! go version | grep -Fq "$gover"; then
   curl "https://dl.google.com/go/go$gover.darwin-amd64.tar.gz" | \
     sudo tar xz -C /usr/local
 fi
-
-# Node
-asdf_plugin_update "nodejs" "https://github.com/asdf-vm/asdf-nodejs"
-export NODEJS_CHECK_SIGNATURES=no
-asdf install nodejs 12.2.0
-asdf global nodejs 12.2.0
-asdf reshim nodejs
-npm config set scripts-prepend-node-path true
-
-# Ruby
-asdf_plugin_update "ruby" "https://github.com/asdf-vm/asdf-ruby"
-asdf install ruby 2.6.1
