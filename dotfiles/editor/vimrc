@@ -31,11 +31,6 @@ set splitright
 set tabstop=2
 set textwidth=80
 
-
-" theme
-set background=dark
-colorscheme palenight
-
 if &compatible
   set nocompatible
 end
@@ -50,21 +45,17 @@ call plug#begin('~/.vim/plugged')
   Plug '/usr/local/opt/fzf' " binary installed via Homebrew
   Plug 'junegunn/fzf.vim'   " plugin to add :Files and :Ag commands
 
-" Plug 'AndrewRadev/splitjoin.vim'
   Plug 'dense-analysis/ale'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'hashivim/vim-terraform'
   Plug 'janko-m/vim-test'
   Plug 'junegunn/vim-easy-align'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'mxw/vim-jsx'
   Plug 'nicholaides/words-to-avoid.vim'
-" Plug 'pangloss/vim-javascript'
   Plug 'pbrisbin/vim-mkdir'
   Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-projectionist'
+
   Plug 'drewtempelmeyer/palenight.vim'
   Plug 'mhartington/oceanic-next'
 
@@ -213,3 +204,6 @@ hi diffAdded      ctermfg=30  cterm=NONE
 
 " Disable spelling by default, enable per-filetype
 autocmd BufRead setlocal nospell
+
+set background=dark
+colo OceanicNext

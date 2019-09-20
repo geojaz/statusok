@@ -22,7 +22,7 @@
 [fetch]
   prune = true
 [github]
-  user = croaky
+  user = eric-hole
 [include]
   path = ~/.gitconfig.local
 [init]
@@ -44,5 +44,5 @@
 [rerere]
   enabled = true
 [user]
-  name = Dan Croak
-  email = dan@statusok.com
+  name = eric-hole
+  email = eric.hole@getcruise.com
